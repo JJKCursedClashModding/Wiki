@@ -254,7 +254,7 @@ Edit transition enums, armor flags, homing links on the hit row.
 
 ## Finding your character's data
 
-Per-character slices live in `datatables_by_char/<CHAR_ID>/` (e.g. `datatables_by_char/CP_010/`) in the (datatables repo)[https://github.com/JJKCursedClashModding/DataTables/tree/master/datatables_by_character]. Each folder has that character's rows from every table — much easier than searching the full `datatables/` files.
+Per-character slices live in `datatables_by_char/<CHAR_ID>/` (e.g. `datatables_by_char/CP_010/`) in the [datatables repo](https://github.com/JJKCursedClashModding/DataTables/tree/master/datatables_by_character). Each folder has that character's rows from every table — much easier than searching the full `datatables/` files.
 
 Character ID reference: see `wiki/reference/characters.md` (`CP_010` = Yuji, `CP_140` = Jogo, etc.).
 
