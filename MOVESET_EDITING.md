@@ -109,7 +109,7 @@ One row per attack set (`CP_010_ATTACKA`, `CP_010_ATTACKE_1`, etc.).
 
 ### `Id_Attack` — the combo chain
 
-An ordered list of attack-row IDs (up to 12 slots, rest filled with `"None"`):
+An ordered list of attack-row IDs (up to 12 slots):
 
 ```json
 "CP_010_ATTACKA": {
@@ -119,8 +119,7 @@ An ordered list of attack-row IDs (up to 12 slots, rest filled with `"None"`):
     "CP_010_ATTACKA_02_01",
     "CP_010_ATTACKA_03_SETUP_01",
     "CP_010_ATTACKA_03_01",
-    "CP_010_ATTACKA_04_01",
-    "None", "None"
+    "CP_010_ATTACKA_04_01"
   ]
 }
 ```
@@ -141,7 +140,7 @@ Not every set is a combo. Y+Down might be one row:
 
 ```json
 "CP_010_ATTACKB": {
-  "Id_Attack": ["CP_010_ATTACKB_01_01", "None"]
+  "Id_Attack": ["CP_010_ATTACKB_01_01"]
 }
 ```
 
@@ -185,16 +184,6 @@ Move **logic**: animations, input windows, transitions, armor, homing, CE gain o
 | `AttackTiming` | Phase timing / active frames |
 | `Id_ActionHoming` | Homing behavior during the attack |
 | `CursedEnergy_Add` | CE meter change when using this move |
-
-### Adding a new move
-
-1. Duplicate a nearby row with similar behavior.
-2. Give it a **new unique ID** (row key and `ID` field must match).
-3. Put it in the **same shard** as the character's other attacks.
-4. Reference the new ID from `AttackSetDataTable.Id_Attack`.
-5. If you changed `CharacterAnimation`, update `CharacterAnimationDataTable` too.
-
-SETUP rows (`…_SETUP_01`) typically have no damage — they wind up before the real hit.
 
 ---
 
@@ -261,17 +250,11 @@ Find the row matching the hit ID, adjust `Damage`, `DamageType`, meter fields, e
 
 Edit transition enums, armor flags, homing links on the hit row.
 
-### 5. Create a genuinely new move
-
-**Tables:** All four + often `CharacterAnimationDataTable`
-
-Clone attack row → new ID → add to attack set → clone/edit damage row (only if anim supports it) → wire up in `ActionDataTable` if it's a new button assignment.
-
 ---
 
 ## Finding your character's data
 
-Per-character slices live in `input_by_char/<CHAR_ID>/` (e.g. `input_by_char/CP_010/`). Each folder has that character's rows from every table — much easier than searching the full `input_json/` files.
+Per-character slices live in `datatables_by_char/<CHAR_ID>/` (e.g. `datatables_by_char/CP_010/`) in the (datatables repo)[https://github.com/JJKCursedClashModding/DataTables/tree/master/datatables_by_character]. Each folder has that character's rows from every table — much easier than searching the full `datatables/` files.
 
 Character ID reference: see `wiki/reference/characters.md` (`CP_010` = Yuji, `CP_140` = Jogo, etc.).
 
@@ -309,5 +292,3 @@ Character ID reference: see `wiki/reference/characters.md` (`CP_010` = Yuji, `CP
 | **AttackSetDataTable** | "Which hits fire, in what order?" |
 | **AttackDataTable** | "How does each hit behave?" |
 | **DamageDataTable** | "What happens when it connects?" |
-
-See also: `wiki/reference/moves.md` for a shorter JSON-focused reference.
